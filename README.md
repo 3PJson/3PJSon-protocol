@@ -47,19 +47,17 @@ The acknowledge should serve as a way to free the line after a successful transa
 
 
 
-**A NOT-Acknowledge should be emitted :**
+**An INVALID -Acknowledge should be emitted :**
 
 - When a Json object deserialization fails
 - When a received CRC doesn't match it's calculated value
 
-**A NOT-Acknowledge should not be emitted :**
+**An INVALID -Acknowledge should not be emitted :**
 
 - When a data transferred with valid integrity cannot be used. A high level user dependent answer can be implemented to programmatically tackle these edge cases. This is not the role of the mid-low level protocol routine.
 - When bytes are received without a start byte initiating a Json, Binary Scalar or Fast Acknowledge. The data must be trashed until a valid starting byte is encountered 
 - When an line was partially received (timed out after start). In that case the data can just be trashed.
 - When a line start is incorrect. An Overflow Acknowledge must be sent to put the line in a known state and all bytes currently in the UART buffer should be trashed.
-
-
 
 **An OVERFLOW should be emitted only**
 
@@ -71,7 +69,7 @@ The acknowledge should serve as a way to free the line after a successful transa
 
 
 
-A frozen line timeout ensures that the communication can recovers from a TX and RX simultaneous Overflow Acknowledge from both agents in case it happens. After this timeout, without sending data for a given amount of time after an Overflow-Acknowledge has been received, if no Line-Ready-Acknowledge has been received, the half duplex line is put back into service by the sending agent.
+A frozen line **timeout** is required to ensure that the communication can recover from a TX and RX simultaneous OVERFLOW Acknowledge emitted by both agents in case it happens. After this timeout, without sending data for a given amount of time after an Overflow-Acknowledge has been received, if no Line-Ready-Acknowledge has been received, the half duplex line is put back into service by the sending agent.
 
 
 
