@@ -75,4 +75,14 @@ A frozen line **timeout** is required to ensure that the communication can recov
 
 
 
+---------
+
+## Revision : simplification - August 12 2021.
+
+- Only one packet start byte : **{** = **0x7B** = **123**
+
+- 
+
+
+
 2021 - Timothé Jost Mousseau
